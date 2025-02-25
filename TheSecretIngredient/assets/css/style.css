@@ -1,0 +1,28 @@
+/*.background-page {*/
+/*	background-color: #537A5A;*/
+/*}*/
+
+/*.navbar-container {*/
+/*	background-color: #2C302E;*/
+/*}*/
+
+/*.navbar-default .navbar-brand {*/
+/*	color: #FFFFFF;*/
+/*}*/
+
+/*.navbar-default .navbar-nav > li > a {*/
+/*	color: #FFFFFF;*/
+/*}*/
+
+/*.panel-default > .panel-heading {*/
+/*	background-image: linear-gradient(to bottom, #474A48 0%, #474A48 100%);*/
+/*	color: #FFFFFF;*/
+/*}*/
+
+/*.panel-default > .panel-body {*/
+/*	background-color: #decbb7;*/
+/*}*/
+
+.container {
+	padding-top: 75px;
+}

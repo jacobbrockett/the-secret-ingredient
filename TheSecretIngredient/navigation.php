@@ -11,10 +11,17 @@ if(isset($_GET['page']))
         case "login":
             echo '<li><a href="index.php">Home</a></li>';
             echo '<li class="active"><a href="index.php?page=login">Log In</a></li>';
+            echo '<li><a href="index.php?page=profile">Profile</a></li>';
+            break;
+        case "profile":
+            echo '<li><a href="index.php">Home</a></li>';
+            echo '<li><a href="index.php?page=login">Log In</a></li>';
+            echo '<li class="active"><a href="index.php?page=profile">Profile</a></li>';
             break;
         default:
             echo '<li class="active"><a href="index.php">Home</a></li>';
             echo '<li><a href="index.php?page=login">Log In</a></li>';
+            echo '<li><a href="index.php?page=profile">Profile</a></li>';
             break;
     }
 }
@@ -22,6 +29,8 @@ else
 {
     echo '<li class="active"><a href="index.php">Home</a></li>';
     echo '<li><a href="index.php?page=login">Log In</a></li>';
+    echo '<li><a href="index.php?page=profile">Profile</a></li>';
+
 }
 
 

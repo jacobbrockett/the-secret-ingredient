@@ -39,6 +39,9 @@ if(isset($_GET['page']))
         case "login":
             include("login.php");
             break;
+        case "profile":
+            include("profile.php");
+            break;
         default:
             include("home.php");
             break;

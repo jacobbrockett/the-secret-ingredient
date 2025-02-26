@@ -7,6 +7,7 @@ echo '<ul class="nav navbar-nav">';
 function active_page($active_page = 'index'): void
 {
     echo '<li'. ($active_page === 'index' ? ' class="active"' : '') .'><a href="index.php">Home</a></li>';
+    echo '<li'. ($active_page === 'browse' ? ' class="active"' : '') .'><a href="index.php?page=browse">Browse</a></li>';
     echo '<li'. ($active_page === 'profile' ? ' class="active"' : '') .'><a href="index.php?page=profile">Profile</a></li>';
     echo '<li'. ($active_page === 'login' ? ' class="active"' : '') .'><a href="index.php?page=login">Log In</a></li>';
 }

@@ -26,3 +26,9 @@
 .container {
 	padding-top: 75px;
 }
+
+a:link {
+	color: black;
+	background-color: transparent;
+	text-decoration: none;
+}

@@ -1,36 +1,26 @@
 <?php
+// Navbar Component
 echo '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">';
 echo '<ul class="nav navbar-nav">';
 
+// Function for setting active page:
+function active_page($active_page = 'index'): void
+{
+    echo '<li'. ($active_page === 'index' ? ' class="active"' : '') .'><a href="index.php">Home</a></li>';
+    echo '<li'. ($active_page === 'profile' ? ' class="active"' : '') .'><a href="index.php?page=profile">Profile</a></li>';
+    echo '<li'. ($active_page === 'login' ? ' class="active"' : '') .'><a href="index.php?page=login">Log In</a></li>';
+}
+
+// Check which page currently on
 if(isset($_GET['page']))
 {
-    $page=$_GET['page'];
+    $page=$_GET['page']; // get page currently on
 
-    switch($page)
-    {
-        case "login":
-            echo '<li><a href="index.php">Home</a></li>';
-            echo '<li class="active"><a href="index.php?page=login">Log In</a></li>';
-            echo '<li><a href="index.php?page=profile">Profile</a></li>';
-            break;
-        case "profile":
-            echo '<li><a href="index.php">Home</a></li>';
-            echo '<li><a href="index.php?page=login">Log In</a></li>';
-            echo '<li class="active"><a href="index.php?page=profile">Profile</a></li>';
-            break;
-        default:
-            echo '<li class="active"><a href="index.php">Home</a></li>';
-            echo '<li><a href="index.php?page=login">Log In</a></li>';
-            echo '<li><a href="index.php?page=profile">Profile</a></li>';
-            break;
-    }
+    active_page($page); // set navbar tab for page active
 }
 else
 {
-    echo '<li class="active"><a href="index.php">Home</a></li>';
-    echo '<li><a href="index.php?page=login">Log In</a></li>';
-    echo '<li><a href="index.php?page=profile">Profile</a></li>';
-
+    active_page(); // default page tab active
 }
 
 

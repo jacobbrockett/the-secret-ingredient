@@ -22,18 +22,18 @@
         </div>
 
         <?php
-        include("navigation.php");
+        include("navigation.php"); // include page links on the navbar
         ?>
     </div>
 </nav>
 
 <?php
-// Content body of index.php
 
 if(isset($_GET['page']))
 {
-    $page=$_GET['page'];
+    $page=$_GET['page']; // get active page
 
+    // Include the correct file for the active page:
     switch($page)
     {
         case "login":
@@ -49,9 +49,9 @@ if(isset($_GET['page']))
 }
 else
 {
+    // Default page:
     include("home.php");
 }
-
 
 ?>
 

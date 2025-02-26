@@ -36,6 +36,9 @@ if(isset($_GET['page']))
     // Include the correct file for the active page:
     switch($page)
     {
+        case "browse":
+            include("browse.php");
+            break;
         case "login":
             include("login.php");
             break;

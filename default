@@ -87,7 +87,7 @@ server {
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
-	server_name recipe-site;
+	server_name recipe-site; # FQDN of the site
 	return 302 https://$server_name$request_uri;
 }
 # Virtual Host configuration for example.com

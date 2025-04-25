@@ -1,0 +1,30 @@
+services:
+  recipe-site-ui:
+    build: ./UI
+    ports:
+      - "8080:80"
+      - "8081:443"
+    volumes:
+      # Source Files
+      - type: bind
+        source: ./UI/Source_Files
+        target: /var/www/html
+        read_only: true
+      # Nginx Snippets
+      - type: bind
+        source: ./UI/snippets
+        target: /etc/nginx/snippets/
+        read_only: true
+      # Default Configuration
+      - type: bind
+        source: ./UI/default
+        target: /etc/nginx/sites-available/default
+        read_only: true
+      # SSL
+      - type: bind
+        source: ./UI/ssl
+        target: /etc/ssl
+        read_only: true
+
+
+

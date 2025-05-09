@@ -27,6 +27,9 @@ services:
         source: ./UI/ssl
         target: /etc/ssl
         read_only: true
+    networks:
+      - web-network
 
-
-
+networks:
+  web-network:
+    external: true

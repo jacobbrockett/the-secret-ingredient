@@ -1,0 +1,50 @@
+name: Update Website Files
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "update-default-conf"
+  update-default-conf:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Create private key file
+        run: |
+          echo "${{ secrets.WEBSERVER_CONTAINERS_EC2_KEY }}" > private-key.pem
+          sudo chmod 600 private-key.pem
+
+      - name: Add host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ec2-18-224-18-112.us-east-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        run: |
+          chmod 600 private-key.pem
+          ssh -i "private-key.pem" ubuntu@ec2-18-224-18-112.us-east-2.compute.amazonaws.com 'cat /home/ubuntu/test-ssh'
+
+      - name: Check Project File Structure
+        run: |
+          ls -alR $GITHUB_WORKSPACE
+
+      # - name: Upload reverse proxy server files
+      #   run: |
+      #     rsync -avz -e "ssh -i private-key.pem" $GITHUB_WORKSPACE/compose.yaml $GITHUB_WORKSPACE/default.conf $GITHUB_WORKSPACE/snippets \
+      #     ubuntu@ec2-18-224-18-112.us-east-2.compute.amazonaws.com:/home/ubuntu/workspace/web-server-reverse-proxy
+
+      

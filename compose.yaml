@@ -1,6 +1,8 @@
 services:
   recipe-site-ui:
     build: ./UI
+    container_name: recipe-site
+    hostname: recipe-site
     ports:
       - "8080:80"
       - "8081:443"

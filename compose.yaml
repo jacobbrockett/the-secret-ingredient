@@ -4,8 +4,8 @@ services:
     container_name: recipe-site
     hostname: recipe-site
     ports:
-      - "8080:80"
-      - "8081:443"
+      - "80:80"
+      - "443:443"
     volumes:
       # Source Files
       - type: bind
@@ -27,9 +27,3 @@ services:
         source: ./UI/ssl
         target: /etc/ssl
         read_only: true
-    networks:
-      - web-network
-
-networks:
-  web-network:
-    external: true

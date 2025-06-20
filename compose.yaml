@@ -1,8 +1,8 @@
 services:
   recipe-site-ui:
     build: ./UI
-    container_name: recipe-site
-    hostname: recipe-site
+    container_name: recipe-site-nginx
+    hostname: recipe-site-nginx
     ports:
       - "80:80"
       - "443:443"
@@ -27,3 +27,20 @@ services:
         source: ./UI/ssl
         target: /etc/ssl
         read_only: true
+
+  recipe-site-db:
+    build: ./DB
+    container_name: recipe-site-mysql
+    hostname: recipe-site-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

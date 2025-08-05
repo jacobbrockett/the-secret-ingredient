@@ -1,0 +1,1 @@
+DELETE from instructions where recipe_id = 1;

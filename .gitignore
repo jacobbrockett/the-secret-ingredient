@@ -5,3 +5,4 @@ db-info.txt
 UI/ssl
 .DS_STORE
 /.env
+/UI/Source_Files/helpers/database.env

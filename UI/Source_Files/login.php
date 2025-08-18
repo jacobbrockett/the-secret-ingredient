@@ -58,7 +58,7 @@ function renderLoginGroup($fieldName, $errorParam, $sessionValue): void
 }
 
 session_start(); // on the server's temp location, create file that can be written to for this client
-include("functions.php");
+include("./helpers/page_helpers.php");
 
 if (!isset($_POST['submit'])) // form not submitted
 {

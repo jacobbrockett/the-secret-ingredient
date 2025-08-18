@@ -28,7 +28,7 @@
         include("./helpers/database_helpers.php");
         $dblink = db_connect("recipe-db");
 
-        $sql = "select recipes.title as 'Title', recipes.Description as 'Description', users.first_name as 'First_Name', users.last_name as 'Last_Name' from recipes INNER JOIN users ON recipes.user_id=users.id;";
+        $sql = "select recipes.id as 'Id', recipes.title as 'Title', recipes.Description as 'Description', users.first_name as 'First_Name', users.last_name as 'Last_Name' from recipes INNER JOIN users ON recipes.user_id=users.id;";
         $results = $dblink->query($sql) or die("<h2>Something went wrong with $sql<br>" . $dblink->error . "</h2>");
 
         return $results;
@@ -38,12 +38,13 @@
     {
         echo '<div class="panel panel-default">';
         echo '<div class="panel-heading">
-                    <h2>' . $db_recipe['Title'] . '</h2>
-                    <p><i>By ' . $db_recipe['First_Name'] . ' ' . $db_recipe['Last_Name'] . '</i></p>
-                  </div>';
+                <h2>' . $db_recipe['Title'] . '</h2>
+                <p><i>By ' . $db_recipe['First_Name'] . ' ' . $db_recipe['Last_Name'] . '</i></p>
+              </div>';
         echo '<div class="panel-body">
-                    <p>' . $db_recipe['Description'] . '</p>
-                  </div>';
+                <p>' . $db_recipe['Description'] . '</p>
+                <p><a class="btn btn-default" href="index.php?page=recipe&id=' . $db_recipe['Id'] . '" role="button">View</a></p>
+              </div>';
         echo '</div>';
     }
 ?>

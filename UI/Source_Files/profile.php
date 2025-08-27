@@ -9,46 +9,51 @@
 
     <div class="page-header">
         <h1>Profile</h1>
+        <?php
+        // Fetch contact information from database:
+        $profile_results = fetch_user_profile($user_id);
+        if ($profile_results){
+            $db_profile = $profile_results->fetch_array(MYSQLI_ASSOC);
+        ?>
         <div class="row">
             <div class="col-md-4">
-                <img src="assets/images/swole_mordecai.jpg" alt="Image of the Regular Show character Mordecai"
-                     style="width:171px;height:180px;">
+            <?php
+            echo '<img src="' . $db_profile['Path'] . '" alt="User profile picture" style="width:171px;height:180px;">';
+            ?>
             </div>
             <div class="col-md-8">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu volutpat velit. Sed ut finibus sapien.
-                    In sed ornare sapien, nec pharetra quam. Pellentesque habitant morbi tristique senectus et netus et
-                    malesuada fames ac turpis egestas. Praesent aliquet felis et libero tincidunt vulputate. Maecenas id
-                    sapien congue, luctus massa dignissim, porttitor nibh. Nunc et lobortis risus, vitae pulvinar risus.
-                    Proin consectetur consectetur sollicitudin. Donec ut tristique ligula, non suscipit odio. Quisque
-                    sagittis ornare vestibulum. Pellentesque elementum nisi vitae lectus mollis aliquam eget pulvinar
-                    sapien. Etiam ut eros scelerisque risus pulvinar sodales. Duis luctus imperdiet risus, vel pretium
-                    diam porta egestas. Sed pellentesque egestas lectus eget semper.</p>
+            <?php
+            echo '<p>' . $db_profile['Bio'] . '</p>';
+            ?>
             </div>
+        <?php
+        }
+        ?>
         </div>
     </div>
 
     <div class="page-header">
         <h1>Contact Information</h1>
         <?php
-        // Fetch user information from database:
-        $user_results = fetch_contact_information($user_id);
-        if ($user_results){
-            $db_user = $user_results->fetch_array(MYSQLI_ASSOC);
+        // Fetch contact information from database:
+        $contact_results = fetch_contact_information($user_id);
+        if ($contact_results){
+            $db_contact = $contact_results->fetch_array(MYSQLI_ASSOC);
         ?>
 
         <h3>Name</h3>
         <?php
-            echo '<p>' . $db_user['First_Name'] . ' ' . $db_user['Last_Name'] . '</p>';
+            echo '<p>' . $db_contact['First_Name'] . ' ' . $db_contact['Last_Name'] . '</p>';
         ?>
 
         <h3>Email</h3>
         <?php
-            echo '<p>' . $db_user['Email'] . '</p>';
+            echo '<p>' . $db_contact['Email'] . '</p>';
         ?>
 
         <h3>Phone Number</h3>
         <?php
-            echo '<p>' . $db_user['Phone_Number'] . '</p>';
+            echo '<p>' . $db_contact['Phone_Number'] . '</p>';
         }
         ?>
 
@@ -61,12 +66,12 @@
         <p>View list of condensed recipes user has uploaded</p>
         <?php
         // Fetch recipes from database:
-        $results = fetch_uploaded_recipes($user_id);
+        $uploaded_results = fetch_uploaded_recipes($user_id);
 
         // Display the recipes:
-        if ($results) {
-            while ($db_recipe = $results->fetch_array(MYSQLI_ASSOC)) {
-                display_recipe($db_recipe);
+        if ($uploaded_results) {
+            while ($db_uploaded = $uploaded_results->fetch_array(MYSQLI_ASSOC)) {
+                display_recipe($db_uploaded);
             }
         }
         ?>
@@ -74,16 +79,28 @@
 
     <div class="page-header">
         <h1>Favorite Recipes</h1>
+<!--        TODO: Fetch 'saved' recipes-->
         <p>View list of condensed recipes user has "saved"</p>
+
         <!--        TODO: add functionality to "unsave" recipes-->
     </div>
 
 </div>
 
 <?php
-function fetch_contact_information($user_id): bool|mysqli_result
+
+function fetch_user_profile($user_id): bool|mysqli_result
 {
     include("./helpers/database_helpers.php");
+    $dblink = db_connect("recipe-db");
+
+    $sql = "select profile.pfp_path as 'Path', profile.bio as 'Bio' from profile where profile.user_id=$user_id";
+    $results = $dblink->query($sql) or die("<h2>Something went wrong with $sql<br>" . $dblink->error . "</h2>");
+
+    return $results;
+}
+function fetch_contact_information($user_id): bool|mysqli_result
+{
     $dblink = db_connect("recipe-db");
 
     $sql = "select id as 'Id', first_name as 'First_Name', last_name as 'Last_Name', email as 'Email', phone_number as 'Phone_Number' from users where id=$user_id;";

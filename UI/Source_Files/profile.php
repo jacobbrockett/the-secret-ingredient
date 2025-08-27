@@ -4,7 +4,7 @@
     ini_set('display_errors', 1);
     // TODO: Get ID of User:
     //        $user_id = $_GET['user_id'];
-    $user_id = "2";
+    $user_id = "1";
     ?>
 
     <div class="page-header">
@@ -18,12 +18,27 @@
         <div class="row">
             <div class="col-md-4">
             <?php
-            echo '<img src="' . $db_profile['Path'] . '" alt="User profile picture" style="width:171px;height:180px;">';
+            if (isset($db_profile['Path'])) {
+                echo '<img src="' . $db_profile['Path'] . '" alt="User profile picture" style="width:171px;height:180px;"/>';
+            }
+            else {
+                echo '<a href="https://www.flaticon.com/free-icons/user" title="user icons">
+                        <figure>
+                            <img src="assets/images/user.png" alt="User profile picture" style="width:171px;height:180px;">
+                            <figcaption>User icons created by Freepik - Flaticon</figcaption>
+                        </figure>
+                      </a>';
+            }
             ?>
             </div>
             <div class="col-md-8">
             <?php
-            echo '<p>' . $db_profile['Bio'] . '</p>';
+            if (isset($db_profile['Bio'])) {
+                echo '<p>' . $db_profile['Bio'] . '</p>';
+            }
+            else {
+                echo '<p>No Bio</p>';
+            }
             ?>
             </div>
         <?php
@@ -99,6 +114,7 @@ function fetch_user_profile($user_id): bool|mysqli_result
 
     return $results;
 }
+
 function fetch_contact_information($user_id): bool|mysqli_result
 {
     $dblink = db_connect("recipe-db");

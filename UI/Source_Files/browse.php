@@ -8,7 +8,7 @@
     //        ini_set('display_errors', 1);
 
     // Fetch recipes from database:
-    $results = fetch_recipes();
+    $results = fetch_uploaded_recipes();
 
     // Display the recipes:
     if ($results) {

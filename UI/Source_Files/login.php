@@ -170,7 +170,7 @@ else
         $dblink->query($sql) or
         die('<h2>Something went wrong with $sql<br>".$dblink->error."</h2>');
 
-        redirect("index.php?page=results&sid=$sid");
+        redirect("index.php?page=browse&sid=$sid");
     }
 }
 
